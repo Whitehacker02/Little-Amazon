@@ -34,6 +34,7 @@ app.post('/api/create-order', (req, res) => {
     const orders = readOrders();
 
     orders[code] = {
+        trackingCode: code,
         product,
         status: "Processing",
         lastUpdate: new Date().toISOString()

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>LuxeMart Store</title>
+
+<style>
+body {
+    font-family: Arial;
+    background: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+}
+
+.product {
+    background: white;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 10px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    background: black;
+    color: white;
+    border: none;
+    margin-top: 5px;
+}
+
+input {
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<h1>🛒 LuxeMart Store</h1>
+
+<div class="product">
+<h3>iPhone 13</h3>
+<button onclick="buy('iPhone 13')">Buy</button>
+</div>
+
+<div class="product">
+<h3>AirPods Pro</h3>
+<button onclick="buy('AirPods Pro')">Buy</button>
+</div>
+
+<div class="product">
+<h3>Gaming Laptop</h3>
+<button onclick="buy('Gaming Laptop')">Buy</button>
+</div>
+
+<div class="product">
+<h3>Smart Watch</h3>
+<button onclick="buy('Smart Watch')">Buy</button>
+</div>
+
+<hr>
+
+<h2>Track Order</h2>
+
+<input id="code" placeholder="Enter tracking code">
+<button onclick="track()">Track</button>
+
+<div id="result"></div>
+
+<script>
+
+async function buy(product) {
+    const res = await fetch('/api/create-order', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ product })
+    });
+
+    const data = await res.json();
+
+    alert("Your Tracking Code: " + data.trackingCode);
+}
+
+async function track() {
+    const code = document.getElementById("code").value;
+
+    const res = await fetch(`/api/order?code=${code}`);
+    const data = await res.json();
+
+    if (res.ok) {
+        document.getElementById("result").innerHTML = `
+            <p>📦 Product: ${data.product}</p>
+            <p>🚚 Status: ${data.status}</p>
+            <p>🕒 Last Update: ${data.lastUpdate}</p>
+        `;
+    } else {
+        document.getElementById("result").innerHTML = "❌ Not found";
+    }
+}
+
+</script>
+
+</body>
+</html>
+

@@ -7,7 +7,10 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
-app.use(express.static('public'));
+app.use(express.static(__dirname));
+app.get('/', (req, res) => { 
+    res.sendfile(path.join(__dirname, 'index.html));
+                           });
 
 const ORDERS_FILE = path.join(__dirname, 'orders.json');
 

@@ -1,0 +1,22 @@
+{
+  "DEMO-IPHONE": {
+    "product": "iPhone 13",
+    "status": "Processing",
+    "lastUpdate": "2026-06-14T00:00:00.000Z"
+  },
+  "DEMO-AIRPODS": {
+    "product": "AirPods Pro",
+    "status": "Shipped",
+    "lastUpdate": "2026-06-14T00:00:00.000Z"
+  },
+  "DEMO-LAPTOP": {
+    "product": "Gaming Laptop",
+    "status": "Delivered",
+    "lastUpdate": "2026-06-14T00:00:00.000Z"
+  },
+  "DEMO-WATCH": {
+    "product": "Smart Watch",
+    "status": "Processing",
+    "lastUpdate": "2026-06-14T00:00:00.000Z"
+  }
+}

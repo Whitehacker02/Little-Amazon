@@ -6,8 +6,16 @@ const { v4: uuidv4 } = require('uuid');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+const ADMIN_KEY = process.env.ADMIN_KEY;
+
+app.post('/api/admin/update-order', (req, res) => {
+    if (req.headers['x-admin-key'] !==ADMIN_KEY) {
+        return res.status(401).json({ error:
+            'Unauthorized'});
+    }
 app.use(express.json());
-app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname,
+                      'public')));
 app.get('/', (req, res) => { 
     res.sendfile(path.join(__dirname, 'index.html'));
                            });
